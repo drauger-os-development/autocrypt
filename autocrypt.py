@@ -81,14 +81,14 @@ else:
 # get cert files
 CERTS = []
 for each in ALLOWED_DOMAINS:
-    if os.path.exists(each + "/fullchain.pem"):
-        CERTS.append(each + "/fullchain.pem")
+    if os.path.exists(SETTINGS["PREFIX"] + each + "/fullchain.pem"):
+        CERTS.append(SETTINGS["PREFIX"] + each + "/fullchain.pem")
 
 
 # read cert files
 CERTS = {key: None for key in CERTS}
 for each in CERTS.keys():
-    with open(CERTS[each], "r") as file:
+    with open(CERTS[each], "rb") as file:
         CERTS[each] = file.read()
 
 
@@ -99,6 +99,11 @@ for each in CERTS.keys():
 
 
 # do something with this info
-print(f"Current run time: { get_current_unix_time() }")
+current_time = get_current_unix_time()
+print(f"Current run time: { current_time }")
 for each in CERTS.keys():
     print(f"Cert at { each } expires { CERTS[each] }, or { convert_to_unix_time(CERTS[each]) }")
+    if current_time >= convert_to_unix_time(CERTS[each]):
+        print("This cert has expired")
+    else:
+        print("This cert is still good.")
