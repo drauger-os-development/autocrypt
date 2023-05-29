@@ -1,0 +1,8 @@
+{
+	"PREFIX": "/etc/letsencrypt/live/",
+	"DOMAINS": [
+			"de.download.draugeros.org",
+			"au.download.draugeros.org",
+			"us.download.draugeros.org"
+		]
+}
