@@ -88,7 +88,7 @@ for each in ALLOWED_DOMAINS:
 # read cert files
 CERTS = {key: None for key in CERTS}
 for each in CERTS.keys():
-    with open(CERTS[each], "rb") as file:
+    with open(each, "rb") as file:
         CERTS[each] = file.read()
 
 
